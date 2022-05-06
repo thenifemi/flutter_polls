@@ -21,6 +21,8 @@ import 'package:flutter_polls/flutter_polls.dart';
 
 ## Example
 
+![Flutter Poll](https://media.giphy.com/media/MtsvCKIWV2HJUkClHW/giphy.gif)
+
 ```dart
 FlutterPolls(
     pollId: '1',
@@ -85,5 +87,3 @@ FlutterPolls(
     ),
 ),
 ```
-
-![Flutter Poll](https://media.giphy.com/media/MtsvCKIWV2HJUkClHW/giphy.gif)
