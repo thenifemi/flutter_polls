@@ -1,39 +1,89 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Flutter Polls
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+Customizable Polls for Flutter.
+Simple, easy to use and highly customizable.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
+## Getting Started
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+In the `pubspec.yaml` of your flutter project, add the following dependency:
 
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
-```dart
-const like = 'sample';
+```yaml
+dependencies:
+  ...
+  flutter_polls: ^0.0.1
 ```
 
-## Additional information
+Import it:
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+```dart
+import 'package:flutter_polls/flutter_polls.dart';
+```
+
+## Example
+
+```dart
+FlutterPolls(
+    pollId: '1',
+    onVoted: (PollOption pollOption, int newTotalVotes) {
+      print('Voted: ${pollOption.id}');
+    },
+    pollOptionsSplashColor: Colors.white(),
+    votedProgressColor: Colors.greyDark().withOpacity(0.3),
+    votedBackgroundColor: Colors.grey().withOpacity(0.2),
+    votesTextStyle: themeData.textTheme.subtitle1,
+    votedPercentageTextStyle:
+        themeData.textTheme.headline4?.copyWith(
+    color: Colors.black(),
+    ),
+    votedCheckmark: Icon(
+        Icons.circle_check,
+        color: AppColors.black(),
+        height: 18,
+        width: 18,
+    ),
+    pollTitle: Align(
+    alignment: Alignment.centerLeft,
+    child: AutoSizeText(
+        poll['title'],
+        style: TextStyle(
+            fontSize: 20,
+        ),
+    ),
+    pollOptions: poll['options'].map(
+    (option) {
+        return PollOption(
+        id: option['id'],
+        title: AutoSizeText(
+            option['title'],
+            style: tTextStyle(
+            fontSize: 20,
+        ),
+        ),
+        votes: option['votes'],
+        );
+    },
+    ).toList(),
+    metaWidget: Row(
+    children: [
+        const SizedBox(width: 6),
+        AutoSizeText(
+        '•',
+        style: TextStyle(
+            fontSize: 20,
+        ),
+        ),
+        const SizedBox(
+        width: 6,
+        ),
+        AutoSizeText(
+        '2 weeks left',
+        style: TextStyle(
+            fontSize: 20,
+        ),
+        ),
+    ],
+    ),
+),
+```
+
+![Flutter Poll](https://media.giphy.com/media/MtsvCKIWV2HJUkClHW/giphy.gif)
