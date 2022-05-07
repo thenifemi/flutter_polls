@@ -3,6 +3,8 @@
 Customizable Polls for Flutter.
 Simple, easy to use and highly customizable.
 
+[Flutter Polls on pub.dev](https://pub.dev/packages/flutter_polls)
+
 ## Getting Started
 
 In the `pubspec.yaml` of your flutter project, add the following dependency:
