@@ -9,7 +9,7 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 // It can be used in any way and also in a [ListView] or [Column].
 class FlutterPolls extends HookWidget {
   const FlutterPolls({
-    Key? key,
+    super.key,
     required this.pollId,
     this.hasVoted = false,
     this.userVotedOptionId,
@@ -37,7 +37,7 @@ class FlutterPolls extends HookWidget {
     this.votedCheckmark,
     this.votedPercentageTextStyle,
     this.votedAnimationDuration = 1000,
-  }) : super(key: key);
+  });
 
   /// The id of the poll.
   /// This id is used to identify the poll.

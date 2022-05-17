@@ -4,7 +4,7 @@ version: 0.0.3
 homepage: https://github.com/thenifemi/flutter_polls
 
 environment:
-  sdk: ">=2.16.2 <3.0.0"
+  sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
   flutter:
