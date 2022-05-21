@@ -225,13 +225,11 @@ class FlutterPolls extends HookWidget {
                             width: pollOptionsWidth,
                             lineHeight: pollOptionsHeight!,
                             barRadius: votedPollOptionsRadius ??
-                                const Radius.circular(
-                                  8,
-                                ),
+                                const Radius.circular(8),
                             padding: EdgeInsets.zero,
                             percent: pollOption.votes / totalVotes.value,
                             animation: true,
-                            animationDuration: 1000,
+                            animationDuration: votedAnimationDuration,
                             backgroundColor: votedBackgroundColor,
                             progressColor: votedProgressColor,
                             center: Container(
@@ -298,7 +296,8 @@ class FlutterPolls extends HookWidget {
                                 child: pollOption.title,
                               ),
                             ),
-                          )),
+                          ),
+                        ),
                 );
               }
             },
