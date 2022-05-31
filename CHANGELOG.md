@@ -1,3 +1,7 @@
+## 0.0.5
+
+* Added `pollEnded`
+
 ## 0.0.4
 
 * Fix on votedAnimationDuration
