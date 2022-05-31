@@ -24,7 +24,7 @@ class FlutterPolls extends HookWidget {
     this.createdBy,
     this.userToVote,
     this.pollStartDate,
-    this.pollEndDate,
+    this.pollEnded = false,
     this.pollOptionsHeight = 40,
     this.pollOptionsWidth,
     this.pollOptionsBorderRadius,
@@ -124,8 +124,8 @@ class FlutterPolls extends HookWidget {
   /// The date the poll was created.
   final DateTime? pollStartDate;
 
-  /// The date the poll will closed.
-  final DateTime? pollEndDate;
+  /// If poll is closed.
+  final bool pollEnded;
 
   /// Height of a [PollOption].
   /// The height is the same for all options.
@@ -215,7 +215,7 @@ class FlutterPolls extends HookWidget {
               } else {
                 return AnimatedSwitcher(
                   duration: const Duration(milliseconds: 300),
-                  child: userHasVoted.value
+                  child: userHasVoted.value || pollEnded
                       ? Container(
                           key: UniqueKey(),
                           margin: EdgeInsets.only(

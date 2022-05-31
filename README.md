@@ -108,7 +108,7 @@ metaWidget | Widget | The meta widget. Can be any widget.
 createdBy | String | The poll creator.
 userToVote | String | The user to vote.
 pollStartDate | DateTime | The poll start date.
-pollEndDate | DateTime | The poll end date.
+pollEnded | bool | If the poll is closed.
 pollOptionsHeight | double | The poll options height.
 pollOptionsWidth | double | The poll options width.
 pollOptionsBorderRadius | BorderRadius | The poll options border radius.
