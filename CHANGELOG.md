@@ -1,3 +1,8 @@
+## 0.0.6
+
+* Added `leadingVotedProgressColor`.
+* Bug fixes.
+
 ## 0.0.5
 
 * Added `pollEnded`
