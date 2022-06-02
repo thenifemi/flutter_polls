@@ -22,6 +22,7 @@ import 'package:flutter_polls/flutter_polls.dart';
 ```
 
 ## Example
+Check out the example project in the `example` directory here: [example on github](https://github.com/thenifemi/flutter_polls/tree/main/example)
 
 ![Flutter Poll](https://media.giphy.com/media/MtsvCKIWV2HJUkClHW/giphy.gif)
 
