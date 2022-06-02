@@ -25,15 +25,16 @@ class FlutterPolls extends HookWidget {
     this.userToVote,
     this.pollStartDate,
     this.pollEnded = false,
-    this.pollOptionsHeight = 40,
+    this.pollOptionsHeight = 36,
     this.pollOptionsWidth,
     this.pollOptionsBorderRadius,
     this.pollOptionsFillColor,
     this.pollOptionsSplashColor = Colors.grey,
     this.pollOptionsBorder,
     this.votedPollOptionsRadius,
-    this.votedBackgroundColor = Colors.grey,
-    this.votedProgressColor = Colors.blue,
+    this.votedBackgroundColor = const Color(0xffEEF0EB),
+    this.votedProgressColor = const Color(0xff84D2F6),
+    this.leadingVotedProgessColor = const Color(0xff0496FF),
     this.votedCheckmark,
     this.votedPercentageTextStyle,
     this.votedAnimationDuration = 1000,
@@ -47,9 +48,10 @@ class FlutterPolls extends HookWidget {
   /// Checks if a user has already voted in this poll.
   /// If this is set to true, the user can't vote in this poll.
   /// Default value is false.
-  final bool? hasVoted;
+  /// [userVotedOptionId] must also be provided if this is set to true.
+  final bool hasVoted;
 
-  /// If a user has already voted in this poll, you must provide the voted poll option id.
+  /// If a user has already voted in this poll.
   /// It is ignored if [hasVoted] is set to false or not set at all.
   final int? userVotedOptionId;
 
@@ -129,7 +131,7 @@ class FlutterPolls extends HookWidget {
 
   /// Height of a [PollOption].
   /// The height is the same for all options.
-  /// Defaults to 40.
+  /// Defaults to 36.
   final double? pollOptionsHeight;
 
   /// Width of a [PollOption].
@@ -164,12 +166,16 @@ class FlutterPolls extends HookWidget {
   final Radius? votedPollOptionsRadius;
 
   /// Color of the background of a [PollOption] when the user has voted.
-  /// Defaults to [Colors.grey].
+  /// Defaults to [const Color(0xffEEF0EB)].
   final Color? votedBackgroundColor;
 
   /// Color of the progress bar of a [PollOption] when the user has voted.
-  /// Defaults to [Colors.blue].
+  /// Defaults to [const Color(0xff84D2F6)].
   final Color? votedProgressColor;
+
+  /// Color of the leading progress bar of a [PollOption] when the user has voted.
+  /// Defaults to [const Color(0xff0496FF)].
+  final Color? leadingVotedProgessColor;
 
   /// Widget for the checkmark of a [PollOption] when the user has voted.
   /// Defaults to [Icons.check_circle_outline_rounded].
@@ -186,7 +192,8 @@ class FlutterPolls extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userHasVoted = useState<bool>(hasVoted ?? false);
+    final hasPollEnded = useState(pollEnded);
+    final userHasVoted = useState(hasVoted);
     final votedOption = useState<PollOption?>(hasVoted == false
         ? null
         : pollOptions
@@ -210,12 +217,12 @@ class FlutterPolls extends HookWidget {
         else
           ...pollOptions.map(
             (pollOption) {
-              if (hasVoted == true && userVotedOptionId == null) {
+              if (hasVoted && userVotedOptionId == null) {
                 throw ('>>>Flutter Polls: User has voted but [userVotedOption] is null.<<<');
               } else {
                 return AnimatedSwitcher(
                   duration: const Duration(milliseconds: 300),
-                  child: userHasVoted.value || pollEnded
+                  child: userHasVoted.value || hasPollEnded.value
                       ? Container(
                           key: UniqueKey(),
                           margin: EdgeInsets.only(
@@ -231,7 +238,17 @@ class FlutterPolls extends HookWidget {
                             animation: true,
                             animationDuration: votedAnimationDuration,
                             backgroundColor: votedBackgroundColor,
-                            progressColor: votedProgressColor,
+                            progressColor: pollOption.votes ==
+                                    pollOptions
+                                        .reduce(
+                                          (max, option) =>
+                                              max.votes > option.votes
+                                                  ? max
+                                                  : option,
+                                        )
+                                        .votes
+                                ? leadingVotedProgessColor
+                                : votedProgressColor,
                             center: Container(
                               width: double.infinity,
                               padding: const EdgeInsets.symmetric(
@@ -246,7 +263,7 @@ class FlutterPolls extends HookWidget {
                                     votedCheckmark ??
                                         const Icon(
                                           Icons.check_circle_outline_rounded,
-                                          color: Colors.white,
+                                          color: Colors.black,
                                           size: 16,
                                         ),
                                   const Spacer(),
@@ -266,9 +283,9 @@ class FlutterPolls extends HookWidget {
                           ),
                           child: InkWell(
                             onTap: () {
-                              userHasVoted.value = true;
                               votedOption.value = pollOption;
                               totalVotes.value++;
+                              userHasVoted.value = true;
                               onVoted(votedOption.value!, totalVotes.value);
                             },
                             splashColor: pollOptionsSplashColor,
@@ -309,7 +326,7 @@ class FlutterPolls extends HookWidget {
               '${totalVotes.value} $votesText',
               style: votesTextStyle ??
                   const TextStyle(
-                    fontSize: 16,
+                    fontSize: 14,
                     fontWeight: FontWeight.w500,
                   ),
             ),
