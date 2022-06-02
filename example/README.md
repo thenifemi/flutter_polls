@@ -1,3 +1,3 @@
 # Example for Flutter Polls
 
-![Flutter Poll](/example.png)
+![Flutter Poll](https://raw.githubusercontent.com/thenifemi/flutter_polls/main/example/example.png)
