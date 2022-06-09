@@ -24,9 +24,10 @@ import 'package:flutter_polls/flutter_polls.dart';
 ## Example
 Check out the example project in the `example` directory here: [example on github](https://github.com/thenifemi/flutter_polls/tree/main/example)
 
-<p
-style="align: start;">
-    <img src="https://media.giphy.com/media/MtsvCKIWV2HJUkClHW/giphy.gif" alt="flutter_polls" width="400" vspace="50">
+<p>
+    <img src="https://media.giphy.com/media/MtsvCKIWV2HJUkClHW/giphy.gif" alt="flutter_polls" width="400" vspace="50" 
+    style="justify-content: start; align-items: start; display: flex;">
+    >
     <img src="https://raw.githubusercontent.com/thenifemi/flutter_polls/main/example/example.png" alt="flutter_polls" width="400" vspace="50"/>
 </p>
 
