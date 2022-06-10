@@ -1,3 +1,7 @@
+## 0.0.7
+
+* Example project updated.
+
 ## 0.0.6
 
 * Added `leadingVotedProgressColor`.
