@@ -14,6 +14,7 @@ class FlutterPolls extends HookWidget {
     this.hasVoted = false,
     this.userVotedOptionId,
     required this.onVoted,
+    this.loadingWidget,
     required this.pollTitle,
     this.heightBetweenTitleAndOptions = 10,
     required this.pollOptions,
@@ -38,7 +39,7 @@ class FlutterPolls extends HookWidget {
     this.votedCheckmark,
     this.votedPercentageTextStyle,
     this.votedAnimationDuration = 1000,
-  });
+  }) : _isloading = false;
 
   /// The id of the poll.
   /// This id is used to identify the poll.
@@ -51,15 +52,23 @@ class FlutterPolls extends HookWidget {
   /// [userVotedOptionId] must also be provided if this is set to true.
   final bool hasVoted;
 
+  /// Checks if the [onVoted] execution is completed or not
+  /// true, if the [onVoted] exection is ongoing
+  /// false, if completed
+  final bool _isloading;
+
   /// If a user has already voted in this poll.
   /// It is ignored if [hasVoted] is set to false or not set at all.
   final int? userVotedOptionId;
 
+  /// An asynchronous callback for HTTP call feature
   /// Called when the user votes for an option.
   /// The index of the option that the user voted for is passed as an argument.
   /// If the user has already voted, this callback is not called.
   /// If the user has not voted, this callback is called.
-  final void Function(PollOption pollOption, int newTotalVotes) onVoted;
+  /// If the callback returns true, the tapped [PollOption] is considered as voted.
+  /// Else Nothing happens,
+  final Future<bool> Function(PollOption pollOption, int newTotalVotes) onVoted;
 
   /// The title of the poll. Can be any widget with a bounded size.
   final Widget pollTitle;
@@ -91,7 +100,7 @@ class FlutterPolls extends HookWidget {
   /// The [title] of each poll option is displayed to the user.
   /// [title] can be any widget with a bounded size.
   /// The [votes] of each poll option is the number of votes that the option has received.
-  final List<dynamic> pollOptions;
+  final List<PollOption> pollOptions;
 
   /// The height between the title and the options.
   /// The default value is 10.
@@ -190,10 +199,16 @@ class FlutterPolls extends HookWidget {
   /// If you don't want the progress bar to animate, set this to 0.
   final int votedAnimationDuration;
 
+  /// Loading animation widget for [PollOption] when [onVoted] callback is invoked
+  /// Defaults to [CircularProgressIndicator]
+  /// Visible until the [onVoted] execution is completed,
+  final Widget? loadingWidget;
+
   @override
   Widget build(BuildContext context) {
     final hasPollEnded = useState(pollEnded);
     final userHasVoted = useState(hasVoted);
+    final isLoading = useState(_isloading);
     final votedOption = useState<PollOption?>(hasVoted == false
         ? null
         : pollOptions
@@ -204,7 +219,7 @@ class FlutterPolls extends HookWidget {
             .first);
     final totalVotes = useState<int>(pollOptions.fold(
       0,
-      (acc, option) => acc + option.votes as int,
+      (acc, option) => acc + option.votes,
     ));
 
     return Column(
@@ -282,11 +297,21 @@ class FlutterPolls extends HookWidget {
                             bottom: heightBetweenOptions ?? 8,
                           ),
                           child: InkWell(
-                            onTap: () {
+                            onTap: () async {
+                              /// Stops clicking while loading
+                              if (isLoading.value) return;
                               votedOption.value = pollOption;
-                              totalVotes.value++;
-                              userHasVoted.value = true;
-                              onVoted(votedOption.value!, totalVotes.value);
+
+                              isLoading.value = true;
+                              bool success = await onVoted(
+                                  votedOption.value!, totalVotes.value);
+                              isLoading.value = false;
+
+                              if (success) {
+                                pollOption.votes++;
+                                totalVotes.value++;
+                                userHasVoted.value = true;
+                              }
                             },
                             splashColor: pollOptionsSplashColor,
                             borderRadius: pollOptionsBorderRadius ??
@@ -310,7 +335,11 @@ class FlutterPolls extends HookWidget {
                                     ),
                               ),
                               child: Center(
-                                child: pollOption.title,
+                                child: isLoading.value &&
+                                        pollOption.id == votedOption.value!.id
+                                    ? loadingWidget ??
+                                        const CircularProgressIndicator()
+                                    : pollOption.title,
                               ),
                             ),
                           ),
@@ -349,5 +378,5 @@ class PollOption {
 
   final int? id;
   final Widget title;
-  final int votes;
+  int votes;
 }
