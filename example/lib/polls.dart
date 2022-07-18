@@ -35,7 +35,7 @@ List polls() => [
           {
             'id': 2,
             'title': 'No, they do not',
-            'votes': 20,
+            'votes': 0,
           },
           {
             'id': 3,

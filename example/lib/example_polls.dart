@@ -20,9 +20,9 @@ class _ExamplePollsState extends State<ExamplePolls> {
         child: ListView.builder(
           itemCount: polls().length,
           itemBuilder: (BuildContext context, int index) {
-            final poll = polls()[index];
+            final Map<String, dynamic> poll = polls()[index];
 
-            final days = DateTime(
+            final int days = DateTime(
               poll['end_date'].year,
               poll['end_date'].month,
               poll['end_date'].day,
@@ -40,7 +40,11 @@ class _ExamplePollsState extends State<ExamplePolls> {
                 pollId: poll['id'].toString(),
                 // hasVoted: hasVoted.value,
                 // userVotedOptionId: userVotedOptionId.value,
-                onVoted: (PollOption pollOption, int newTotalVotes) {
+                onVoted: (PollOption pollOption, int newTotalVotes) async {
+                  await Future.delayed(const Duration(seconds: 2));
+
+                  /// IF HTTP status code >= 400, return true else false
+                  return true;
                   // hasVoted.value = true;
                   // userVotedOptionId.value = pollOption.id;
                 },
@@ -55,21 +59,24 @@ class _ExamplePollsState extends State<ExamplePolls> {
                     ),
                   ),
                 ),
-                pollOptions: poll['options'].map(
-                  (option) {
-                    return PollOption(
-                      id: option['id'],
-                      title: Text(
-                        option['title'],
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
+                pollOptions: List<PollOption>.from(
+                  poll['options'].map(
+                    (option) {
+                      var a = PollOption(
+                        id: option['id'],
+                        title: Text(
+                          option['title'],
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      ),
-                      votes: option['votes'],
-                    );
-                  },
-                ).toList(),
+                        votes: option['votes'],
+                      );
+                      return a;
+                    },
+                  ),
+                ),
                 votedPercentageTextStyle: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
