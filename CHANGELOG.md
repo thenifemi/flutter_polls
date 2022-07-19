@@ -1,3 +1,9 @@
+## 0.0.8
+
+* `onVoted` function is now asynchronous.
+* `List<dynamic>` for poll options updated to `List<PollOption>`.
+* `loadingWidget` added as a parameter.
+
 ## 0.0.7
 
 * Example project updated.

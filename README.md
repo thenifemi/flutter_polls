@@ -14,7 +14,7 @@ In the `pubspec.yaml` of your flutter project, add the following dependency:
 ```yaml
 dependencies:
   ...
-  flutter_polls: ^0.0.7
+  flutter_polls: ^0.0.8
 ```
 
 Import it:
@@ -24,11 +24,10 @@ import 'package:flutter_polls/flutter_polls.dart';
 ```
 
 ## Example
+
 Check out the example project in the `example` directory here: [example on github](https://github.com/thenifemi/flutter_polls/tree/main/example)
 
-
 <img src="https://raw.githubusercontent.com/thenifemi/flutter_polls/main/example/example.png" alt="flutter_polls" width="400" vspace="50"/>
-
 
 ```dart
 FlutterPolls(
@@ -126,3 +125,4 @@ votedProgressColor | Color | The voted poll options progress color.
 votedCheckmark | Widget | The voted poll options checkmark.
 votedPercentageTextStyle | TextStyle | The voted poll options percentage text style.
 votedAnimationDuration | int | The voted poll options animation duration.
+loadingWidget | Widget | The loading widget when a user votes. Can be any widget.
