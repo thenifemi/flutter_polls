@@ -1,6 +1,6 @@
 name: flutter_polls
 description: Customizable Polls for Flutter. Simple, easy to use and highly customizable.
-version: 0.0.8
+version: 0.0.9
 homepage: https://github.com/thenifemi/flutter_polls
 
 environment:

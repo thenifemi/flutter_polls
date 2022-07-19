@@ -1,3 +1,7 @@
+## 0.0.9
+
+* Bug fixes
+
 ## 0.0.8
 
 * `onVoted` function is now asynchronous.
