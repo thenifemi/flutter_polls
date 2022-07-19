@@ -43,10 +43,8 @@ class _ExamplePollsState extends State<ExamplePolls> {
                 onVoted: (PollOption pollOption, int newTotalVotes) async {
                   await Future.delayed(const Duration(seconds: 2));
 
-                  /// IF HTTP status code >= 400, return true else false
+                  /// If HTTP status is success, return true else false
                   return true;
-                  // hasVoted.value = true;
-                  // userVotedOptionId.value = pollOption.id;
                 },
                 pollEnded: days < 0,
                 pollTitle: Align(

@@ -53,7 +53,7 @@ class FlutterPolls extends HookWidget {
   final bool hasVoted;
 
   /// Checks if the [onVoted] execution is completed or not
-  /// true, if the [onVoted] exection is ongoing
+  /// it is true, if the [onVoted] exection is ongoing and
   /// false, if completed
   final bool _isloading;
 
@@ -298,13 +298,18 @@ class FlutterPolls extends HookWidget {
                           ),
                           child: InkWell(
                             onTap: () async {
-                              /// Stops clicking while loading
+                              // Disables clicking while loading
                               if (isLoading.value) return;
+
                               votedOption.value = pollOption;
 
                               isLoading.value = true;
+
                               bool success = await onVoted(
-                                  votedOption.value!, totalVotes.value);
+                                votedOption.value!,
+                                totalVotes.value,
+                              );
+
                               isLoading.value = false;
 
                               if (success) {
@@ -337,8 +342,14 @@ class FlutterPolls extends HookWidget {
                               child: Center(
                                 child: isLoading.value &&
                                         pollOption.id == votedOption.value!.id
-                                    ? loadingWidget ??
-                                        const CircularProgressIndicator()
+                                    ? SizedBox(
+                                        height: 20,
+                                        width: 20,
+                                        child: loadingWidget ??
+                                            const CircularProgressIndicator(
+                                              strokeWidth: 2,
+                                            ),
+                                      )
                                     : pollOption.title,
                               ),
                             ),
