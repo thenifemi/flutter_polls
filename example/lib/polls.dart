@@ -53,17 +53,17 @@ List polls() => [
         'id': 3,
         'question':
             'How do you know that your experience of consciousness is the same as other people’s experience of consciousness?',
-        'end_date': DateTime(2022, 09, 30),
+        'end_date': DateTime(2022, 04, 30),
         'options': [
           {
             'id': 2,
             'title': 'It is certain that they do',
-            'votes': 20,
+            'votes': 0,
           },
           {
             'id': 3,
             'title': 'How am I supposed to know?',
-            'votes': 10,
+            'votes': 0,
           },
         ],
       },
