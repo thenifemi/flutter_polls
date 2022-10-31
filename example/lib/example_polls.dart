@@ -13,7 +13,10 @@ class _ExamplePollsState extends State<ExamplePolls> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Flutter Polls 🗳')),
+      appBar: AppBar(
+        title: const Text('Flutter Polls 🗳'),
+        backgroundColor: Colors.black,
+      ),
       body: Container(
         height: MediaQuery.of(context).size.height,
         padding: const EdgeInsets.all(20),
@@ -41,7 +44,7 @@ class _ExamplePollsState extends State<ExamplePolls> {
                 // hasVoted: hasVoted.value,
                 // userVotedOptionId: userVotedOptionId.value,
                 onVoted: (PollOption pollOption, int newTotalVotes) async {
-                  await Future.delayed(const Duration(seconds: 2));
+                  await Future.delayed(const Duration(seconds: 1));
 
                   /// If HTTP status is success, return true else false
                   return true;

@@ -249,7 +249,9 @@ class FlutterPolls extends HookWidget {
                             barRadius: votedPollOptionsRadius ??
                                 const Radius.circular(8),
                             padding: EdgeInsets.zero,
-                            percent: pollOption.votes / totalVotes.value,
+                            percent: totalVotes.value == 0
+                                ? 0
+                                : pollOption.votes / totalVotes.value,
                             animation: true,
                             animationDuration: votedAnimationDuration,
                             backgroundColor: votedBackgroundColor,

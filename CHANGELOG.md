@@ -1,42 +1,46 @@
+## 0.1.1
+
+- Bug fixes for NAN value
+
 ## 0.1.0
 
-* Bug fixes
+- Bug fixes
 
 ## 0.0.9
 
-* Bug fixes
+- Bug fixes
 
 ## 0.0.8
 
-* `onVoted` function is now asynchronous.
-* `List<dynamic>` for poll options updated to `List<PollOption>`.
-* `loadingWidget` added as a parameter.
+- `onVoted` function is now asynchronous.
+- `List<dynamic>` for poll options updated to `List<PollOption>`.
+- `loadingWidget` added as a parameter.
 
 ## 0.0.7
 
-* Example project updated.
+- Example project updated.
 
 ## 0.0.6
 
-* Added `leadingVotedProgressColor`.
-* Bug fixes.
+- Added `leadingVotedProgressColor`.
+- Bug fixes.
 
 ## 0.0.5
 
-* Added `pollEnded`
+- Added `pollEnded`
 
 ## 0.0.4
 
-* Fix on votedAnimationDuration
+- Fix on votedAnimationDuration
 
 ## 0.0.3
 
-* Updated to Flutter 3 and Dart 2.17.0
+- Updated to Flutter 3 and Dart 2.17.0
 
 ## 0.0.2
 
-* Added example.
+- Added example.
 
 ## 0.0.1
 
-* Initial release.
+- Initial release.

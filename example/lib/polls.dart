@@ -57,7 +57,7 @@ List polls() => [
         'options': [
           {
             'id': 2,
-            'title': 'It is certain that they do',
+            'title': 'It is certain that it is the same',
             'votes': 0,
           },
           {
