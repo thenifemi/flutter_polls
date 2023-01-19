@@ -122,6 +122,7 @@ FlutterPolls(
 | votedPollOptionsRadius       | Radius                                                  | The voted poll options border radius.                                                               |
 | votedBackgroundColor         | Color                                                   | The voted poll options background color.                                                            |
 | votedProgressColor           | Color                                                   | The voted poll options progress color.                                                              |
+| votedIdColor                 | Color                                                   | The voted poll options background color when user has voted and its still in progress.              |
 | votedCheckmark               | Widget                                                  | The voted poll options checkmark.                                                                   |
 | votedPercentageTextStyle     | TextStyle                                               | The voted poll options percentage text style.                                                       |
 | votedAnimationDuration       | int                                                     | The voted poll options animation duration.                                                          |
