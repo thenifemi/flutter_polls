@@ -36,6 +36,7 @@ class FlutterPolls extends HookWidget {
     this.votedBackgroundColor = const Color(0xffEEF0EB),
     this.votedProgressColor = const Color(0xff84D2F6),
     this.leadingVotedProgessColor = const Color(0xff0496FF),
+    this.votedIdColor = const Color(0xffEEF0EB),
     this.votedCheckmark,
     this.votedPercentageTextStyle,
     this.votedAnimationDuration = 1000,
@@ -186,6 +187,10 @@ class FlutterPolls extends HookWidget {
   /// Defaults to [const Color(0xff0496FF)].
   final Color? leadingVotedProgessColor;
 
+  /// Color of the background of a [PollOption] when the user clicks to vote and its still in progress.
+  /// Defaults to [const Color(0xffEEF0EB)].
+  final Color? votedIdColor;
+
   /// Widget for the checkmark of a [PollOption] when the user has voted.
   /// Defaults to [Icons.check_circle_outline_rounded].
   final Widget? votedCheckmark;
@@ -255,17 +260,10 @@ class FlutterPolls extends HookWidget {
                             animation: true,
                             animationDuration: votedAnimationDuration,
                             backgroundColor: votedBackgroundColor,
-                            progressColor: pollOption.votes ==
-                                    pollOptions
-                                        .reduce(
-                                          (max, option) =>
-                                              max.votes > option.votes
-                                                  ? max
-                                                  : option,
-                                        )
-                                        .votes
-                                ? leadingVotedProgessColor
-                                : votedProgressColor,
+                            progressColor:
+                                votedOption.value?.id == pollOption.id
+                                    ? leadingVotedProgessColor
+                                    : votedProgressColor,
                             center: Container(
                               width: double.infinity,
                               padding: const EdgeInsets.symmetric(
@@ -332,7 +330,9 @@ class FlutterPolls extends HookWidget {
                               width: pollOptionsWidth,
                               padding: EdgeInsets.zero,
                               decoration: BoxDecoration(
-                                color: pollOptionsFillColor,
+                                color: votedOption.value?.id == pollOption.id
+                                    ? votedIdColor
+                                    : pollOptionsFillColor,
                                 border: pollOptionsBorder ??
                                     Border.all(
                                       color: Colors.black,
