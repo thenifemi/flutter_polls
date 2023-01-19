@@ -1,3 +1,7 @@
+## 0.1.2
+
+- `VoteInProgressColor` The voted poll options background color when user has voted and its still in progress - added.
+
 ## 0.1.1
 
 - Bug fixes for NAN value

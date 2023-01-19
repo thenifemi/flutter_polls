@@ -36,7 +36,7 @@ class FlutterPolls extends HookWidget {
     this.votedBackgroundColor = const Color(0xffEEF0EB),
     this.votedProgressColor = const Color(0xff84D2F6),
     this.leadingVotedProgessColor = const Color(0xff0496FF),
-    this.votedIdColor = const Color(0xffEEF0EB),
+    this.voteInProgressColor = const Color(0xffEEF0EB),
     this.votedCheckmark,
     this.votedPercentageTextStyle,
     this.votedAnimationDuration = 1000,
@@ -189,7 +189,7 @@ class FlutterPolls extends HookWidget {
 
   /// Color of the background of a [PollOption] when the user clicks to vote and its still in progress.
   /// Defaults to [const Color(0xffEEF0EB)].
-  final Color? votedIdColor;
+  final Color? voteInProgressColor;
 
   /// Widget for the checkmark of a [PollOption] when the user has voted.
   /// Defaults to [Icons.check_circle_outline_rounded].
@@ -331,7 +331,7 @@ class FlutterPolls extends HookWidget {
                               padding: EdgeInsets.zero,
                               decoration: BoxDecoration(
                                 color: votedOption.value?.id == pollOption.id
-                                    ? votedIdColor
+                                    ? voteInProgressColor
                                     : pollOptionsFillColor,
                                 border: pollOptionsBorder ??
                                     Border.all(
