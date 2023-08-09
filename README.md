@@ -14,7 +14,7 @@ In the `pubspec.yaml` of your flutter project, add the following dependency:
 ```yaml
 dependencies:
   ...
-  flutter_polls: ^0.1.1
+  flutter_polls: ^0.1.3
 ```
 
 Import it:
