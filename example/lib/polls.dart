@@ -3,7 +3,7 @@ List polls() => [
         'id': 1,
         'question':
             'Is Flutter the best framework for building cross-platform applications?',
-        'end_date': DateTime(2022, 5, 21),
+        'end_date': DateTime(2023, 11, 21),
         'options': [
           {
             'id': 1,
