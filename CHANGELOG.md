@@ -1,3 +1,7 @@
+## 0.1.4
+
+- PollOption id type changed from `int` to `String`.
+
 ## 0.1.3
 
 - Bug fixes

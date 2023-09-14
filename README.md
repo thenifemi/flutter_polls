@@ -14,7 +14,7 @@ In the `pubspec.yaml` of your flutter project, add the following dependency:
 ```yaml
 dependencies:
   ...
-  flutter_polls: ^0.1.3
+  flutter_polls: ^0.1.4
 ```
 
 Import it:
@@ -103,7 +103,7 @@ FlutterPolls(
 | userVotedOptionId            | int                                                     | The user voted option id. If the user hasn't voted, this will be null.                              |
 | onVoted                      | void Function(PollOption pollOption, int newTotalVotes) | The callback when the user voted.                                                                   |
 | pollTitle                    | Widget                                                  | The poll title. Can be any widget.                                                                  |
-| pollOptions                  | List<dynamic>                                           | The poll options. Each item is a map with the following keys: id, title, votes.                     |
+| pollOptions                  | List<PollOption>                                        | The poll options. Each item is a map with the following keys: id, title, votes.                     |
 | heightBetweenTitleAndOptions | double                                                  | The height between the poll title and the poll options.                                             |
 | heightBetweenOptions         | double                                                  | The height between the poll options.                                                                |
 | votesText                    | String                                                  | Votes text. Can be "Votes", "Votos", "Ibo" or whatever language. If not specified, "Votes" is used. |
