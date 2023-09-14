@@ -64,7 +64,7 @@ class _ExamplePollsState extends State<ExamplePolls> {
                   poll['options'].map(
                     (option) {
                       var a = PollOption(
-                        id: option['id'],
+                        id: option['id'].toString(),
                         title: Text(
                           option['title'],
                           style: const TextStyle(

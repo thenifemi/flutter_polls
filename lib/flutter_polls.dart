@@ -410,7 +410,7 @@ class PollOption {
     required this.votes,
   });
 
-  final int? id;
+  final String? id;
   final Widget title;
   int votes;
 }
