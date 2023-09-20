@@ -61,7 +61,7 @@ class FlutterPolls extends HookWidget {
 
   /// If a user has already voted in this poll.
   /// It is ignored if [hasVoted] is set to false or not set at all.
-  final int? userVotedOptionId;
+  final String? userVotedOptionId;
 
   /// An asynchronous callback for HTTP call feature
   /// Called when the user votes for an option.

@@ -14,7 +14,7 @@ In the `pubspec.yaml` of your flutter project, add the following dependency:
 ```yaml
 dependencies:
   ...
-  flutter_polls: ^0.1.4
+  flutter_polls: ^0.1.5
 ```
 
 Import it:
@@ -97,10 +97,10 @@ FlutterPolls(
 ## Parameters
 
 | Parameter                    | Type                                                    | Description                                                                                         |
-| ---------------------------- | ------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| ---------------------------- |---------------------------------------------------------| --------------------------------------------------------------------------------------------------- |
 | pollId                       | String                                                  | The poll id.                                                                                        |
 | hasVoted                     | bool                                                    | Whether the user has voted.                                                                         |
-| userVotedOptionId            | int                                                     | The user voted option id. If the user hasn't voted, this will be null.                              |
+| userVotedOptionId            | String                                                  | The user voted option id. If the user hasn't voted, this will be null.                              |
 | onVoted                      | void Function(PollOption pollOption, int newTotalVotes) | The callback when the user voted.                                                                   |
 | pollTitle                    | Widget                                                  | The poll title. Can be any widget.                                                                  |
 | pollOptions                  | List<PollOption>                                        | The poll options. Each item is a map with the following keys: id, title, votes.                     |
