@@ -1,3 +1,7 @@
+## 0.1.6
+
+- Updated for Flutter 3.16.9, Bug fixes and improvements.
+
 ## 0.1.5
 
 - `userVotedOptionId` type changed from `int` to `String`.
