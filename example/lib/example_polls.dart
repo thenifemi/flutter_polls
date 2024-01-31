@@ -15,15 +15,14 @@ class _ExamplePollsState extends State<ExamplePolls> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Flutter Polls 🗳'),
-        backgroundColor: Colors.black,
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
         padding: const EdgeInsets.all(20),
         child: ListView.builder(
-          itemCount: polls().length,
+          itemCount: polls.length,
           itemBuilder: (BuildContext context, int index) {
-            final Map<String, dynamic> poll = polls()[index];
+            final Map<String, dynamic> poll = polls[index];
 
             final int days = DateTime(
               poll['end_date'].year,
@@ -37,13 +36,16 @@ class _ExamplePollsState extends State<ExamplePolls> {
                 ))
                 .inDays;
 
+            bool hasVoted = poll['hasVoted'] ?? false;
+
             return Container(
               margin: const EdgeInsets.only(bottom: 20),
               child: FlutterPolls(
                 pollId: poll['id'].toString(),
-                // hasVoted: hasVoted.value,
-                // userVotedOptionId: userVotedOptionId.value,
+                hasVoted: hasVoted,
+                userVotedOptionId: poll['userVotedOptionId'].toString(),
                 onVoted: (PollOption pollOption, int newTotalVotes) async {
+                  /// Simulate HTTP request
                   await Future.delayed(const Duration(seconds: 1));
 
                   /// If HTTP status is success, return true else false
@@ -62,20 +64,17 @@ class _ExamplePollsState extends State<ExamplePolls> {
                 ),
                 pollOptions: List<PollOption>.from(
                   poll['options'].map(
-                    (option) {
-                      var a = PollOption(
-                        id: option['id'].toString(),
-                        title: Text(
-                          option['title'],
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
+                    (option) => PollOption(
+                      id: option['id'].toString(),
+                      title: Text(
+                        option['title'],
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
                         ),
-                        votes: option['votes'],
-                      );
-                      return a;
-                    },
+                      ),
+                      votes: option['votes'],
+                    ),
                   ),
                 ),
                 votedPercentageTextStyle: const TextStyle(
@@ -92,7 +91,7 @@ class _ExamplePollsState extends State<ExamplePolls> {
                       width: 6,
                     ),
                     Text(
-                      days < 0 ? "ended" : "ends $days days",
+                      days < 0 ? "ended" : "ends in $days days",
                     ),
                   ],
                 ),

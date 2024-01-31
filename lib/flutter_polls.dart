@@ -248,7 +248,7 @@ class FlutterPolls extends HookWidget {
           ...pollOptions.map(
             (pollOption) {
               if (hasVoted && userVotedOptionId == null) {
-                throw ('>>>Flutter Polls: User has voted but [userVotedOption] is null.<<<');
+                throw ('>>>Flutter Polls: User has voted but [userVotedOptionId] is null.<<<');
               } else {
                 return AnimatedSwitcher(
                   duration: const Duration(milliseconds: 300),
